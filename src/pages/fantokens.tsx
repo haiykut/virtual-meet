@@ -1,6 +1,7 @@
 import BackToHub from "@/components/BackToHub";
 import { TokenData } from "@/types/TokenData";
 import React, { type FC } from "react";
+import { useTokenMetadata } from "@/hooks/useTokenMetadatas";
 
 const TokenCard: FC<TokenData> = (token) => {
     let createDate = null;
@@ -63,12 +64,23 @@ const TokenCard: FC<TokenData> = (token) => {
 };
 
 function FanTokensListPage() {
+    const { message, tokens, loading } = useTokenMetadata();
+
+    if (loading) return <p className="my-8 text-center text-4xl">Loading.</p>;
+    if (message) return <p>{message}</p>;
     return (
         <div>
             <h1 className="my-8 text-center text-3xl font-bold  ">
                 Fan Tokens
             </h1>
-            <div className=" mx-4 my-8 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch"></div>
+            <div className=" mx-4 my-8 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                {
+                    tokens.map((token) => {
+                        return (
+                                <TokenCard {...token} /> 
+                        );
+                    })}
+            </div>
 
             <BackToHub />
         </div>
