@@ -7,7 +7,7 @@ import { formatBalance } from "@/util/formatBalance";
 function MeetingPage() {
     //const native = 0;
     const countdownDate = new Date("2023-12-31T23:59:59");
-    const { message, nativeBalance } = useBalances();
+    const { message, tokenBalances, nativeBalance } = useBalances();
     const native =
     nativeBalance && Number(nativeBalance.balance) > 0
         ? formatBalance(nativeBalance.balance)

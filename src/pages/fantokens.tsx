@@ -66,7 +66,7 @@ const TokenCard: FC<TokenData> = (token) => {
 function FanTokensListPage() {
     const { message, tokens, loading } = useTokenMetadata();
 
-    if (loading) return <p className="my-8 text-center text-4xl">Loading.</p>;
+    if (loading) return <p>Loading...</p>;
     if (message) return <p>{message}</p>;
     return (
         <div>
@@ -75,9 +75,11 @@ function FanTokensListPage() {
             </h1>
             <div className=" mx-4 my-8 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                 {
-                    tokens.map((token) => {
+                    tokens.map((token, id) => {
                         return (
-                                <TokenCard {...token} /> 
+                            <div className="w-full h-full" key={id}>
+                                <TokenCard {...token} />
+                            </div>
                         );
                     })}
             </div>
